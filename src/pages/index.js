@@ -1,6 +1,8 @@
 import Form from './Form';
+import Context from './Context';
 
-export { Form };
+export { Form, Context };
 export default {
-  Form
+  Form,
+  Context,
 }

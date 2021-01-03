@@ -10,18 +10,20 @@ const Persist = (props) => {
   const { query, updateQuery } = useQueryParams();
 
   React.useEffect(() => {
-      props.formik.setFormikState(query);
-  });
+    props.formik.setFormikState(query);
+  }, []);
 
   React.useEffect(() => {
     const hasValuesChange = isEqual(preValues.current, props.formik.values);
     if (!hasValuesChange) {
+      console.log("yolol")
       // props.formik.setFormikState(t.query);
       updateQuery(props.formik.values);
     }
-  });
+  }, [props.formik.submitCount, props.formik.values, updateQuery]);
 
   const preValues = React.useRef();
+
   React.useEffect(() => {
     preValues.current = props.formik.values;
   });

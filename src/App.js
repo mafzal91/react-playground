@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { useQueryParams } from './hooks'
 import Pages from './pages'
 import './App.css';
@@ -13,7 +13,17 @@ const App = () => {
         <QueryParamProvider>
           <Switch>
             <Route path="/form" component={Pages.Form} />
-            <Redirect from='/' to='/form' />
+            <Route path="/context" component={Pages.Context} />
+            <Route path="/" render={() => (
+              <div>
+                <div>
+                  <Link to="/form">Form Example</Link>
+                </div>
+                <div>
+                  <Link to="/context">Context Example</Link>
+                </div>
+              </div>
+            )} />
           </Switch>
         </QueryParamProvider>
       </Router>

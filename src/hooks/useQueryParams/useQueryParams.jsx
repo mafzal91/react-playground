@@ -20,24 +20,25 @@ const queryReducer = (state, action) => {
 const useQueryParams = (props) => {
   const { history, location } = React.useContext(QueryParamContext);
   const [query, dispatchQuery] = React.useReducer(queryReducer, initializeQuery(location.search));
-  console.log(query)
+  // console.log("dsdsdS", query)
   const updateQuery = (payload) => {
     dispatchQuery({ type: "UPDATE", payload });
   }
 
   React.useEffect(() => {
     const hasQueryChanged = isEqual(prevQuery.current, query);
-      if (!hasQueryChanged) {
-        history.replace({
-          search: qs.stringify(query),
-        });
-      }
+    console.log(hasQueryChanged)
+    if (!hasQueryChanged) {
+      history.replace({
+        search: qs.stringify(query),
+      });
+    }
   });
 
   const prevQuery = React.useRef();
-    React.useEffect(() => {
+  React.useEffect(() => {
     prevQuery.current = query;
-  });
+  }, []);
 
 
   return {
